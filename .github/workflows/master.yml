@@ -9,8 +9,7 @@ jobs:
     steps:
     - name: vet
       run: |
-        echo $PWD
-        ls -al
+        cd ..
         go vet ./...
   lint:
     container:
@@ -20,6 +19,7 @@ jobs:
     steps:
     - name: lint
       run: |
+        cd ..
         go get golang.org/x/lint/golint
         golint -set_exit_status $(go list ./...)
   test:
@@ -29,4 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: test
-      run: go test ./...
+      run: |
+        cd ..
+        go test ./...
