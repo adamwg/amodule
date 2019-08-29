@@ -1,0 +1,17 @@
+name: check-master
+on: push
+jobs:
+  check:
+    container:
+      image: docker://golang:1.12.8
+    name: check
+    runs-on: ubuntu-latest
+    steps:
+    - name: vet
+      run: go vet
+    - name: lint
+      run: |
+        go get golang.org/x/lint/golint
+        golint -set_exit_status $(go list ./...)
+    - name: test
+      run: go test ./...
