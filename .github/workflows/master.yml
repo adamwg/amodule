@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: vet
-      run: go vet
+      run: go vet ./...
     - name: lint
       run: |
         go get golang.org/x/lint/golint
